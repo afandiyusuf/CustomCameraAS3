@@ -11,12 +11,18 @@ package com.ya.object
 	 */
 	public class CustomCamera 
 	{
+		public static const CAMERA_CLOSE:String = "cam_close";
+		public static const CAMERA_STANDBY:String = "cam_standby";
+		public static const CAMERA_PAUSE:String = "cam_pause";
+		
 		private var cam:Camera;
 		private var vid:Video;
 		private var container:MovieClip;
 		
 		private var thisHeight:int;
 		private var thisWidth:int;
+		
+		private var state:String = "";
 		
 		public function CustomCamera(_container:MovieClip,_width:int,_height:int,_fps:int) 
 		{
@@ -75,19 +81,29 @@ package com.ya.object
 		
 		public function CloseCamera():void
 		{
+			state = CAMERA_CLOSE;
 			vid.attachCamera(null);
+			
 			container.removeChild(vid);
-			trace("hello");
 		}
 		
 		public function PauseCamera():void
 		{
+			state = CAMERA_PAUSE;
 			vid.attachCamera(null);
+			
+			if (!container.contains(vid))
+				container.addChild(vid);
+			
 		}
 		
 		public function ResumeCamera():void
 		{
+			state = CAMERA_STANDBY;
 			vid.attachCamera(cam);
+			
+			if (!container.contains(vid))
+				container.addChild(vid);
 		}
 		
 		public function RotateCamera():void
@@ -124,6 +140,11 @@ package com.ya.object
 			var bmd:BitmapData = new BitmapData(container.width, container.height, false);
 			bmd.draw(container);
 			return bmd;
+		}
+		
+		public function GetState():String
+		{
+			return state;
 		}
 	}
 
