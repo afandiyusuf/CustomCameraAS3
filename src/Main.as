@@ -1,6 +1,7 @@
 package
 {
 	import com.ya.object.CustomCamera;
+	import com.ya.object.ImageLoader;
 	import flash.desktop.NativeApplication;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
@@ -9,6 +10,7 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.KeyboardEvent;
+	import flash.filesystem.File;
 	import flash.ui.Keyboard;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
@@ -21,14 +23,25 @@ package
 	{
 		private var cc:CustomCamera ;
 		private var b:Bitmap;
+		private var l:ImageLoader;
+		
+		
 		public function Main() 
 		{
 			
-			var mc:MovieClip = new MovieClip();
-			cc= new CustomCamera(mc,100,80,60);
-			addChild(mc);
-			mc.x = 200;
-			mc.y = 200;
+			//how to use image loader
+			var urlImage:String = File.documentsDirectory.resolvePath("a.jpg").url;
+			var movieClipContainer:MovieClip = new MovieClip();
+			imageLoader = new ImageLoader(urlImage);
+			imageLoader.addTo(movieClipContainer);
+			addChild(movieClipContainer);
+			
+			
+			//how to add custom camera
+			var cameraContainer:MovieClip = new MovieClip();
+			customCamera= new CustomCamera(cameraContainer,100,80,60);
+			addChild(cameraContainer);
+			
 			
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, testKeyboard);
