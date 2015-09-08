@@ -108,30 +108,45 @@ package com.ya.object
 		
 		public function RotateCamera():void
 		{
+			container.removeChild(vid);
+			vid.attachCamera(null);
+			
 			if (vid.rotation == 0)
 			{
-				vid.y = 0;
-				vid.rotation = 90;
-				vid.x = vid.width;
 				
+				cam.setMode(this.thisHeight, this.thisWidth, 60);
+				vid = new Video(this.thisHeight, this.thisWidth);
+				
+				vid.rotation = 90;
+				vid.y = 0;
+				vid.x = vid.width;
 			}else if (vid.rotation == 90)
 			{
+				cam.setMode(thisWidth, thisHeight, 60);
+				vid = new Video(this.thisWidth, this.thisHeight);
+				
 				vid.rotation = 180;
 				vid.y = vid.height;
 				vid.x = vid.width;
 			}else if (vid.rotation == 180)
 			{
+				cam.setMode(this.thisHeight, this.thisWidth, 60);
+				vid = new Video(this.thisHeight, this.thisWidth);
+				
 				vid.rotation = -90;
 				vid.x = 0;
 				vid.y = vid.height;
 			}else if (vid.rotation == -90)
 			{
+				cam.setMode(thisWidth, thisHeight, 60);
+				vid = new Video(this.thisWidth, this.thisHeight);
 				vid.rotation = 0;
 				vid.x = 0;
 				vid.y = 0;
 			}
 			
-			trace(vid.rotation);
+			vid.attachCamera(cam);
+			container.addChild(vid);
 		}
 		
 		
