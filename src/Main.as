@@ -15,7 +15,6 @@ package
 	
 	/**
 	 * ...
-	 
 	 * @author Yusuf Afandi
 	 */
 	public class Main extends Sprite 
