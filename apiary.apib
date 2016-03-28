@@ -1,0 +1,119 @@
+FORMAT: 1A
+HOST: http://localhost/index.php
+
+# Base Game
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+## User [/user]
+Api untuk operasi user
+
+### Register [POST/register]
+Register new user
+
++ Attributes
+    + username: yusuf (string) - Username user
+    + password: oi2u1312iu (string) - Password user
+    + nama_depan : yusuf (string) - Nama depan
+    + nama_belakang : afandi (string) - Nama belakang
+    + email : afandi.yusuf.04@gmail.com (string) - Email user
+    + alamat : bandung (string) - Alamat user
+    + no_hp : 09129287012 (string) - No hp user
+    
++ Request (application/x-www-form-urlencoded)
+
++ Response 200 (application/json)
+
+    Register success, user akan mendapatkan access token
+
+    + Body
+
+            {
+                "status_code": "200",
+                "status_message": "success",
+                "data": [
+                    {
+                        "access_token": "100 Long RandomString",
+                      
+                    }
+                ]
+            }
+
++ Response 401 (application/json)
+
+    Username sudah terpakai
+    
+    + Body
+
+            {
+                "status_code": "401",
+                "status_message": "username sudah terpakai",
+                "data": []
+            }
+            
+            
++ Response 402 (application/json)
+
+    Data tidak lengkap
+    
+    + Body
+
+            {
+                "status_code": "402",
+                "status_message": "data tidak lengkap",
+                "data": []
+            }
+            
+            
+### Login [POST/login/{username}/{password}]
+Login dengan username  dan password yang telah didaftarkan
+
+
++ Parameters
+    + username: yusuf (string) - Username user
+    + password: oi2u1312iu (string) - Password user
+    
++ Request (application/x-www-form-urlencoded)
+
+
++ Response 200 (application/json)
+
+    Login success, user akan mendapatkan access token
+
+    + Body
+
+            {
+                "status_code": "200",
+                "status_message": "login success",
+                "data": [
+                    {
+                        "access_token": "100 Long RandomString",
+                      
+                    }
+                ]
+            }
+
++ Response 400 (application/json)
+
+    Database error
+    
+    + Body
+
+            {
+                "status_code": "400",
+                "status_message": "database error",
+                "data": []
+            }
+            
+            
++ Response 404 (application/json)
+
+   User atau password salah
+    
+    + Body
+
+            {
+                "status_code": "404",
+                "status_message": "User atau password salah",
+                "data": []
+            }
